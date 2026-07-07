@@ -1,0 +1,65 @@
+<view class="page result-page">
+  <view wx:if="{{poll}}" class="content">
+    <view class="summary-card">
+      <view class="question-meta">
+        <view class="meta-left">
+          <text class="tag category-tag">{{poll.category}}</text>
+          <text class="tag">{{typeText}}</text>
+          <text class="status {{isClosed ? 'closed' : ''}}">{{statusText}}</text>
+        </view>
+        <button class="more-button" bindtap="openMore">···</button>
+      </view>
+      <text class="summary-title">{{poll.title}}</text>
+      <text class="summary-creator">发起人：{{poll.creatorName}}</text>
+      <text wx:if="{{poll.description}}" class="summary-desc">{{poll.description}}</text>
+      <view class="summary-row">
+        <view>
+          <text class="summary-number">{{participantCount}}</text>
+          <text class="summary-label">参与人数</text>
+        </view>
+        <view>
+          <text class="summary-number">{{totalVotes}}</text>
+          <text class="summary-label">累计票数</text>
+        </view>
+        <view>
+          <text class="summary-number">{{poll.options.length}}</text>
+          <text class="summary-label">选项</text>
+        </view>
+      </view>
+      <text class="deadline">{{deadlineText}}</text>
+    </view>
+
+    <view class="result-list">
+      <text class="result-title">实时结果</text>
+      <view wx:for="{{results}}" wx:key="id" class="result-item {{item.isTop ? 'top' : ''}}">
+        <view class="result-header">
+          <text class="result-name">{{item.text}}</text>
+          <text class="result-percent">{{item.percent}}%</text>
+        </view>
+        <view class="bar">
+          <view class="bar-fill" style="width: {{item.percent}}%;"></view>
+        </view>
+        <view class="result-footer">
+          <text>{{item.votes}} 票</text>
+          <text wx:if="{{item.isTop}}">当前最高</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{hasVoted}}" class="joined-card">
+      <text class="joined-title">投票已参与</text>
+      <text class="joined-desc">感谢你的参与，可以继续分享给朋友。</text>
+    </view>
+
+    <view class="bottom-actions">
+      <button class="secondary-button" bindtap="goDetail">{{hasVoted || isClosed ? '查看投票' : '参与投票'}}</button>
+      <button open-type="share" class="primary-button">分享投票</button>
+      <button class="danger-button" bindtap="deletePoll">删除投票</button>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="empty-title">结果不存在</text>
+    <text class="empty-desc">该投票可能已被删除，返回首页查看其他投票。</text>
+  </view>
+</view>
