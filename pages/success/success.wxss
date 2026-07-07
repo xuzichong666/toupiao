@@ -1,0 +1,154 @@
+.success-card {
+  padding: 60rpx 38rpx 44rpx;
+  text-align: center;
+  background: #ffffff;
+  border: 1rpx solid #e6eaf0;
+  border-radius: 18rpx;
+}
+
+.success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112rpx;
+  height: 112rpx;
+  margin: 0 auto 28rpx;
+  color: #ffffff;
+  font-size: 64rpx;
+  font-weight: 800;
+  background: #35c77f;
+  border-radius: 50%;
+}
+
+.success-title {
+  display: block;
+  color: #172033;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.success-name {
+  display: block;
+  margin-top: 22rpx;
+  color: #172033;
+  font-size: 38rpx;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.success-desc,
+.participant,
+.tip-desc {
+  display: block;
+  color: #697386;
+  font-size: 25rpx;
+  line-height: 1.5;
+}
+
+.success-desc {
+  margin-top: 12rpx;
+}
+
+.avatar-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 32rpx;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44rpx;
+  height: 44rpx;
+  margin-left: -10rpx;
+  color: #697386;
+  font-size: 18rpx;
+  background: #eef2f7;
+  border: 3rpx solid #ffffff;
+  border-radius: 50%;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatar.a1 {
+  background: #ffd66b;
+}
+
+.avatar.a2 {
+  background: #58c3ff;
+}
+
+.avatar.a3 {
+  background: #6f63ff;
+}
+
+.participant {
+  margin-top: 12rpx;
+}
+
+.share-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-top: 28rpx;
+}
+
+.share-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 88rpx;
+  color: #ffffff;
+  font-size: 27rpx;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 14rpx;
+}
+
+.share-item.green {
+  background: #20b86f;
+}
+
+.share-item.green-light {
+  background: #45c486;
+}
+
+.share-item.gray {
+  color: #475569;
+  background: #eef2f7;
+}
+
+.share-item.purple {
+  background: #6f63ff;
+}
+
+.tip-card {
+  padding: 26rpx;
+  margin-top: 28rpx;
+  text-align: center;
+  background: #ffffff;
+  border: 1rpx solid #e6eaf0;
+  border-radius: 16rpx;
+}
+
+.tip-title {
+  display: block;
+  color: #172033;
+  font-size: 28rpx;
+  font-weight: 800;
+}
+
+.tip-desc {
+  margin-top: 8rpx;
+}
+
+.bottom-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18rpx;
+  margin-top: 32rpx;
+}
