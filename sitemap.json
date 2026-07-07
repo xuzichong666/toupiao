@@ -1,0 +1,9 @@
+{
+  "desc": "sitemap config for local voting mini program",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}
