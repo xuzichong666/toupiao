@@ -1,0 +1,38 @@
+<view class="page success-page">
+  <view wx:if="{{poll}}" class="success-card">
+    <view class="success-icon">✓</view>
+    <text class="success-title">投票已创建</text>
+    <text class="success-name">{{poll.title}}</text>
+    <text class="success-desc">邀请朋友参与投票，一起达成共识。</text>
+
+    <view class="avatar-row">
+      <view class="avatar a1"></view>
+      <view class="avatar a2"></view>
+      <view class="avatar a3"></view>
+      <view class="avatar more">···</view>
+    </view>
+    <text class="participant">{{participantCount}}人已参与</text>
+  </view>
+
+  <view wx:if="{{poll}}" class="share-grid">
+    <button open-type="share" class="share-item green">微信好友</button>
+    <button open-type="share" class="share-item green-light">微信群</button>
+    <button class="share-item gray" bindtap="copyLink">复制链接</button>
+    <button class="share-item purple" bindtap="goDetail">去投票</button>
+  </view>
+
+  <view wx:if="{{poll}}" class="tip-card">
+    <text class="tip-title">投票链接已准备好</text>
+    <text class="tip-desc">可以分享给朋友，也可以先自己参与投票。</text>
+  </view>
+
+  <view wx:if="{{poll}}" class="bottom-actions">
+    <button class="secondary-button" bindtap="goHome">返回首页</button>
+    <button class="primary-button" bindtap="goDetail">查看投票</button>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="empty-title">投票不存在</text>
+    <text class="empty-desc">该投票可能已被删除，返回首页查看其他投票。</text>
+  </view>
+</view>
