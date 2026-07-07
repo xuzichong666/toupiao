@@ -1,0 +1,71 @@
+<view class="page index-page">
+  <view class="header">
+    <view class="brand">
+      <view class="logo-mark">✓</view>
+      <view>
+        <text class="brand-name">共识投票</text>
+        <text class="brand-subtitle">小分歧，大共识</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="create-card" bindtap="goCreate">
+    <view class="create-plus">+</view>
+    <view class="create-copy">
+      <text class="create-title">发起新投票</text>
+      <text class="create-desc">快速创建投票，收集大家的意见</text>
+    </view>
+  </view>
+
+  <view class="filters">
+    <button
+      wx:for="{{filters}}"
+      wx:key="key"
+      class="filter {{activeFilter === item.key ? 'active' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="switchFilter"
+    >{{item.label}}</button>
+  </view>
+
+  <view wx:if="{{!hasPolls}}" class="empty-state">
+    <text class="empty-title">暂无投票</text>
+    <text class="empty-desc">{{emptyText}}</text>
+  </view>
+
+  <view wx:else class="poll-list">
+    <view wx:for="{{polls}}" wx:key="id" class="poll-card" data-id="{{item.id}}" bindlongpress="openActions">
+      <view class="poll-main" bindtap="goDetail" data-id="{{item.id}}">
+        <view class="poll-meta">
+          <view class="meta-left">
+            <text class="status {{item.statusClass}}">{{item.statusText}}</text>
+            <text class="tag">{{item.typeText}}</text>
+            <text class="tag category-tag">{{item.categoryText}}</text>
+          </view>
+          <text class="date">{{item.deadlineText}}</text>
+        </view>
+        <text class="poll-title">{{item.title}}</text>
+        <text class="poll-creator">发起人：{{item.creatorName}}</text>
+        <text wx:if="{{item.description}}" class="poll-desc">{{item.description}}</text>
+        <view class="poll-row">
+          <view class="avatar-stack">
+            <view class="avatar a1"></view>
+            <view class="avatar a2"></view>
+            <view class="avatar a3"></view>
+          </view>
+          <text class="join-count">{{item.participantCount}}人参与</text>
+        </view>
+        <view class="leading-row">
+          <text>{{item.leadingText}}</text>
+          <text>{{item.leadingPercent}}%</text>
+        </view>
+        <view class="progress">
+          <view class="progress-fill" style="width: {{item.leadingPercent}}%;"></view>
+        </view>
+      </view>
+      <view class="poll-actions">
+        <button class="secondary-button action-button" bindtap="goDetail" data-id="{{item.id}}">{{item.canJoin ? '去投票' : '看详情'}}</button>
+        <button class="secondary-button action-button result-button" bindtap="goResult" data-id="{{item.id}}">实时结果</button>
+      </view>
+    </view>
+  </view>
+</view>
