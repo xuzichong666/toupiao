@@ -1,0 +1,66 @@
+<view class="page detail-page">
+  <view wx:if="{{poll}}" class="content">
+    <view class="question-card">
+      <view class="question-meta">
+        <view class="meta-left">
+          <text class="tag category-tag">{{poll.category}}</text>
+          <text class="tag">{{typeText}}</text>
+          <text class="status {{isClosed ? 'closed' : ''}}">{{statusText}}</text>
+        </view>
+        <button open-type="share" class="share-mini">分享</button>
+      </view>
+      <text class="question-title">{{poll.title}}</text>
+      <text class="question-creator">发起人：{{poll.creatorName}}</text>
+      <text wx:if="{{poll.description}}" class="question-desc">{{poll.description}}</text>
+      <view class="rule-row">
+        <text class="rule">{{ruleText}}</text>
+        <text class="deadline">{{deadlineText}}</text>
+      </view>
+    </view>
+
+    <view class="options">
+      <view
+        wx:for="{{poll.options}}"
+        wx:key="id"
+        class="choice {{item.selected ? 'selected' : ''}} {{hasVoted || isClosed ? 'disabled' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="toggleOption"
+      >
+        <view class="thumb">{{index + 1}}</view>
+        <view class="choice-body">
+          <view class="choice-top">
+            <text class="choice-text">{{item.text}}</text>
+            <text class="vote-count">{{item.votes}}票</text>
+          </view>
+          <view class="choice-bar">
+            <view class="choice-fill" style="width: {{item.percent}}%;"></view>
+          </view>
+        </view>
+        <view class="choice-mark">{{item.selected ? '✓' : ''}}</view>
+      </view>
+    </view>
+
+    <view wx:if="{{hasVoted}}" class="voted-panel">
+      <text class="voted-title">投票已参与</text>
+      <text class="voted-desc">感谢你的参与，可以查看实时结果或继续分享给朋友。</text>
+      <button class="primary-button" bindtap="goResult">查看实时结果</button>
+    </view>
+
+    <view wx:elif="{{isClosed}}" class="voted-panel">
+      <text class="voted-title">投票已结束</text>
+      <text class="voted-desc">当前投票无法继续提交，可以查看最终结果。</text>
+      <button class="primary-button" bindtap="goResult">查看结果</button>
+    </view>
+
+    <view wx:else class="submit-area">
+      <text class="selected-count">{{selectedCountText}}</text>
+      <button class="primary-button submit-button" bindtap="submitVote">提交投票</button>
+      <button class="ghost-button" bindtap="goResult">查看实时结果</button>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="empty-title">投票不存在</text>
+    <text class="empty-desc">该投票可能已被删除，返回首页查看其他投票。</text>
+  </view>
+</view>
