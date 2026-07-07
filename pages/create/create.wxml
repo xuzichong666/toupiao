@@ -1,0 +1,98 @@
+<view class="page create-page">
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-bar">
+      <view class="nav-left" bindtap="navigateBack">
+        <text class="nav-back">＜</text>
+      </view>
+      <text class="nav-title">创建投票</text>
+      <view class="nav-right" bindtap="navigateBack">
+        <text class="nav-cancel">取消</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-section">
+    <text class="section-title">投票内容</text>
+    <view class="field">
+      <text class="label">标题</text>
+      <input class="input" maxlength="30" placeholder="输入投票标题（如：周末去哪玩？）" value="{{title}}" bindinput="onTitleInput" />
+      <text class="counter">{{title.length}}/30</text>
+    </view>
+    <view class="field">
+      <text class="label">说明</text>
+      <textarea class="textarea" maxlength="120" placeholder="可选，补充投票背景或规则" value="{{description}}" bindinput="onDescriptionInput" />
+    </view>
+  </view>
+
+  <view class="form-section">
+    <text class="section-title">投票规则</text>
+    <view class="segmented">
+      <button class="segment {{type === 'single' ? 'active' : ''}}" data-type="single" bindtap="chooseType">单选</button>
+      <button class="segment {{type === 'multiple' ? 'active' : ''}}" data-type="multiple" bindtap="chooseType">多选</button>
+    </view>
+    <view class="segmented" style="margin-top: 16rpx;">
+      <button class="segment {{category === '日常投票' ? 'active' : ''}}" data-category="日常投票" bindtap="chooseCategory">日常投票</button>
+      <button class="segment {{category === '正式投票' ? 'active' : ''}}" data-category="正式投票" bindtap="chooseCategory">正式投票</button>
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-row">
+      <text class="section-title">投票选项</text>
+      <text class="hint">至少 2 项，最多 50 项（共{{options.length}}项）</text>
+    </view>
+    <view class="option-count-row">
+      <text class="option-count-label">设置选项数量：</text>
+      <input class="option-count-input" type="number" placeholder="输入数量" value="{{optionCountInput}}" bindinput="onOptionCountInput" />
+      <button class="option-count-btn" bindtap="applyOptionCount">确定</button>
+    </view>
+    <view class="option-list">
+      <view wx:for="{{options}}" wx:key="index" class="option-row">
+        <text class="option-index">{{index + 1}}</text>
+        <input class="option-input" maxlength="30" placeholder="选项{{index + 1}}" value="{{item}}" data-index="{{index}}" bindinput="onOptionInput" />
+        <button class="remove-option" wx:if="{{options.length > 2}}" data-index="{{index}}" bindtap="removeOption">移除</button>
+      </view>
+    </view>
+    <button class="secondary-button add-option" wx:if="{{options.length < 50}}" bindtap="addOption">+ 添加选项</button>
+  </view>
+
+  <view class="form-section">
+    <text class="section-title">更多设置</text>
+    <view class="setting-row" wx:if="{{type === 'multiple'}}">
+      <view>
+        <text class="setting-title">最多可选</text>
+        <text class="setting-desc">限制每位参与者可选择的数量</text>
+      </view>
+      <view class="stepper">
+        <button bindtap="decreaseMax">-</button>
+        <text>{{maxSelections}}</text>
+        <button bindtap="increaseMax">+</button>
+      </view>
+    </view>
+    <view class="setting-row">
+      <view>
+        <text class="setting-title">匿名投票</text>
+        <text class="setting-desc">不公开展示参与者具体选择</text>
+      </view>
+      <switch checked="{{anonymous}}" color="#6f63ff" bindchange="onAnonymousChange" />
+    </view>
+    <picker range="{{deadlineLabels}}" value="{{deadlineIndex}}" bindchange="onDeadlineChange">
+      <view class="setting-row">
+        <view>
+          <text class="setting-title">截止时间</text>
+          <text class="setting-desc">避免投票时间过长</text>
+        </view>
+        <text class="setting-value">{{deadlineText}} ›</text>
+      </view>
+    </picker>
+    <view class="setting-row">
+      <view>
+        <text class="setting-title">谁可以参与</text>
+        <text class="setting-desc">当前版本为分享后所有人可参与</text>
+      </view>
+      <text class="setting-value">所有人可参与</text>
+    </view>
+  </view>
+
+  <button class="primary-button submit-button" bindtap="submitCreate">创建投票</button>
+</view>
